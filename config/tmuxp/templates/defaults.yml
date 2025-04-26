@@ -1,0 +1,22 @@
+session_name: "config"
+windows:
+  - window_name: editor
+    start_directory: ~/zettelkasten
+    focus: true
+    panes:
+      - shell_command: 'nvim .'
+  - window_name: resources
+    panes:
+      - shell_command: "cd $(find ~/school -type d | fzf)"
+
+
+session_name: "school"
+windows:
+  - window_name: editor
+    start_directory: ~/zettelkasten
+    focus: true
+    panes:
+      - shell_command: 'nvim .'
+  - window_name: resources
+    panes:
+      - shell_command: "cd $(find ~/school -type d | fzf)"

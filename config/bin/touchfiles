@@ -1,0 +1,13 @@
+#!/bin/sh
+
+
+d="dir with space"
+touch "file with space.txt"
+touch "spaces are bad.txt"
+touch "camelCase whichIdontWant.txt"
+
+mkdir -pv "$d"
+
+for i in 1 2 3 4; do
+    touch  "$d/file $i.txt"
+done

@@ -1,0 +1,9 @@
+session_name: "philosophy"
+windows:
+  - window_name: notes
+    panes:
+      - start_directory: ~/zettelkasten
+        shell_command: nvim philosophy.md
+  - window_name: resources
+    start_directory: ~/resources/philosophy
+    

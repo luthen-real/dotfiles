@@ -1,0 +1,4 @@
+#!/bin/sh
+
+
+xdg-open $(cat ~/.local/share/bookmarks | dmenu -l 50)

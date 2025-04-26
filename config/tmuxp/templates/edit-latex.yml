@@ -1,0 +1,12 @@
+session_name: Cheatsheet ${SUBJECT}
+start_directory: ~/projects/cheatsheets/${SUBJECT}
+windows:
+  - window_name: latexmk
+    layout: main-vertical
+    panes:
+      - shell_command:  zathura output/main.pdf
+      - shell_command: latexmk -pdf -outdir=output -pvc --shell-escape main.tex
+  - window_name: editor
+    focus: true
+    panes:
+      - shell_command: nvim .
