@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# This script installs packages listed in the packages.csv file
+# This script installs all packages for my artix setup
 
 packages="packages.csv"
-package_url="todo"
+package_url="https://raw.githubusercontent.com/zeno-nada/setup/refs/heads/main/install/packages.csv"
 
 error() {
     printf "Error: $1\n" >&2; exit 1
@@ -41,16 +41,13 @@ sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
 # The artix keyring is the package which contains the GPG keys of trusted package maintainers
 echo "Refreshing keyring"
 pacman --noconfirm --needed -S  artix-keyring ||  error "Could not refresh keyring"
-pacman --noconfirm --needed -S curl ca-certificates base-devel git ntp zsh dash || error "Failed to install required packages"
+pacman --noconfirm --needed -S curl ca-certificates base-devel git zsh || error "Failed to install required packages"
 
 
 # Use all cores for compilation
 sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
 
-tested () {
 [[ -f "$packages" ]] || curl -L -o "$packages" "$package_url"
-
-
 
 # Main installation loop
 while IFS=, read -r tag package ; do
@@ -65,4 +62,3 @@ while IFS=, read -r tag package ; do
     *) sudo pacman --noconfirm --needed -S "$package" ;;
     esac
 done < $packages
-}
