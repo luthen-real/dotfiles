@@ -1,0 +1,10 @@
+b:~/.local/bin
+bin:~/.local/bin
+c:~/.config
+con:~/.config
+dcon:~/dotfiles/stow/dot-config
+dot:~/dotfiles
+n:~/zettelkasten
+nv:~/.config/nvim
+r:~/resources
+rcs:~/resources/computer_science

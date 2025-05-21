@@ -1,9 +1,0 @@
-#!/bin/sh
-
-
-
-bookmark=$(xclip -o)
-
-echo "$bookmark" >> ~/.local/share/bookmarks
-
-notify-send "Added bookmark" "Bookmark $bookmark added to file"
