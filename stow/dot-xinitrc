@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Start notification daemon
+/usr/bin/dunst &
+
+# Hides mouse when inactive
+/usr/bin/unclutter &
+
+xset r rate 300 50
+redshift -PO 3500
+rfkill block all
+
+
+exec dwm
