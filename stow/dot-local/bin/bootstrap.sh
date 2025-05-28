@@ -1,15 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 
 # This script installs all packages for my setup
 
-packages="packages.csv"
-package_url="https://raw.githubusercontent.com/zeno-nada/setup/refs/heads/main/install/packages.csv"
 
 error() {
     printf "Error: $1\n" >&2; exit 1
 }
 
+# FIX: 
 gitmakeinstall() {
 	username="${1##*/}"
 	repo="${dir%.git}"
@@ -33,74 +32,30 @@ if id -u &>/dev/null ;then
     error "You must run this script as root"
 fi
 
-# make pacman colorful and the dot a the pacman
-grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+# enable parallel downloads
 sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
 
 # The arch linux keyring is the package which contains the GPG keys of trusted package maintainers
 echo "Refreshing keyring"
 pacman --noconfirm --needed -S  archlinux-keyring ||  error "Could not refresh keyring"
-pacman --noconfirm --needed -S curl ca-certificates base-devel git zsh || error "Failed to install required packages"
+
+# NOTE: removed git from this list  since the repo has probably been cloned already
+pacman --noconfirm --needed -S curl ca-certificates base-devel zsh sudo || error "Failed to install required packages"
 
 
 # Use all cores for compilation
 sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
 
-[[ -f "$packages" ]] || curl -L -o "$packages" "$package_url"
 
-# Main installation loop
-while IFS=, read -r tag package ; do
-    case "$tag" in
-    "g")
-        url=$package
-        dir="${url##*/}"
-        git  clone --depth 1 --single-branch --no-tags "$url" /tmp/$dir
-        cd /tmp/$dir || return
-        make
-        make install;;
-    *) sudo pacman --noconfirm --needed -S "$package" ;;
-    esac
-done < $packages
+# yay bootstrap check 
+# Check if yay is already installed, if not, clone the repo and install it
+if ! command yay --version &>/dev/null; then
+    git clone https://aur.archlinux.org/yay.git ~/repos/yay || error "failed to clone yay"
+    cd ~/repos/yay
+    makepkg -si
+    cd -
+fi
 
 
-
-# ---------------------------------------------------------------------------------
-# Create new user
-
-
-printf "Enter password: "; read -s pw0
-printf "\nRetype password: "; read -s pw1
-while ! [ "$pw0" = "$pw1" ]; do
-    printf "\nPasswords do not match."
-    printf "\nEnter password: "; read -s pw0
-    printf "\nRetype password: "; read -s pw1
-done
-echo
-
-useradd -m -G wheel sudo -s /bin/zsh user
-echo "user:$pw0" | chpasswd
-
-
-
-
-# ---------------------------------------------------------------------------------
-# Create required direcories
-
-USER_HOME=/home/user
-mkdir -vp $USER_HOME/projects $USER_HOME/.config $USER_HOME/.shh $USER_HOME
-
-
-# ---------------------------------------------------------------------------------
-# Clone all github repos into ~/projects
-
-
-repos=(
-  "git@github.com:zeno-nada/setup.git"
-)
-
-for repo in "${repos[@]}"; do
-    git clone $repo $USER_HOME/projects/"${repo##*/}"
-done
-
-f=id_ed25519_github
-[ -f $USER_HOME/.ssh/$f.pub ] || ssh-keygen -t ed25519 -b 4096 -C "" -f $USER_HOME/.ssh/$f
+# Run the sync_packages script which downloads all packages using pacman and yay
+./sync_packages.sh

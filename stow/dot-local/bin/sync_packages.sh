@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 # Uses yay to install all packages listed in ~/.config/.../packages.txt
 # TODO: implement management packages installed natively using git/makepkg 
@@ -32,10 +32,10 @@ gitmakeinstall() {
 
 # The arch keyring is the package which contains the GPG keys of trusted package maintainers
 echo "Refreshing keyring and installing required packages"
-sudo pacman --noconfirm --needed -S curl ca-certificates base-devel git zsh || error "Failed to install required packages"
+sudo pacman --noconfirm --needed -S curl sudo ca-certificates base-devel git zsh  || error "Failed to install required packages"
 
 
-# YAY BOOTSTRAP CHECK 
+# yay bootstrap check 
 # Check if yay is already installed, if not, clone the repo and install it
 if ! command yay --version &>/dev/null; then
     git clone https://aur.archlinux.org/yay.git ~/repos/yay || error "failed to clone yay"
@@ -44,7 +44,10 @@ if ! command yay --version &>/dev/null; then
     cd -
 fi
 
-# Main loop
-for package in $(cat ~/.config/$(basename $0)/packages.txt); do
-    yay -S --noconfirm --needed $package
-done
+# INSTALL SECTION
+# Use two files instead of one to be able to distinguish yay packages and packages from the normal repos
+PACMAN_LIST="~/.config/$(basename $0)/pacman.txt"
+[[ -f $PACMAN_LIST ]] &&  sudo pacman -S --needed --noconfirm - < $PACMAN_LIST
+
+YAY_LIST="~/.config/$(basename $0)/yay.txt"
+[[ -f $YAY_LIST ]] &&  yay -S --needed --noconfirm - < $YAY_LIST

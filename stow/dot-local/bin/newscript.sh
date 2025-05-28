@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
 filename=$(gum input --placeholder 'name' --no-show-help)
 
@@ -8,8 +8,7 @@ while [ -f $filename ]; do
 done
 
 
-cat ~/.config/newscript.sh/$(gum choose zsh bash python) >> $filename
-mkdir -vp ~/.config/$filename
+cat ~/.config/newscript.sh/$(gum choose zsh python) >> $filename
 chmod +x $filename
 
 echo "$(basename $0): created file '$filename'"

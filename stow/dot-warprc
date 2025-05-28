@@ -1,7 +1,7 @@
 b:~/.local/bin
 bin:~/.local/bin
 c:~/.config
-con:~/.config
+con:~/repos/dotfiles/stow/dot-config
 dcon:~/dotfiles/stow/dot-config
 docs:~/documents
 dot:~/repos/dotfiles

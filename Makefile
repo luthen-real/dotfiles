@@ -3,3 +3,6 @@ default:
 
 dotfiles:
 	stow --verbose --dotfiles --target=$(HOME) stow
+
+clean:
+	stow -D --verbose --dotfiles --target=$(HOME) stow
