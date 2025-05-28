@@ -2,3 +2,5 @@ nvim
 zsh
 gum
 xorg
+pass
+firefox
