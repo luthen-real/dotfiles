@@ -7,7 +7,7 @@ windows:
       # - start_directory: ~/music
       - start_directory: ~/
   - window_name: todo
-    start_directory: ~/zettelkasten
+    start_directory: ~/documents/zettelkasten/
     panes:
       - shell_command: nvim todo.md
         

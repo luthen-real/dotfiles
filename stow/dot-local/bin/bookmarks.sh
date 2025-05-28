@@ -3,7 +3,8 @@
 
 # script to handle bookmark dmenu helper
 # open: query user using dmenu
-# save: save to correct file in ~/.config/bookmarks.sh
+# save: save to correct file in ~/.config/bookmarks.sh/bookmarks
+
 
 DATA_FILE=~/.config/bookmarks.sh/bookmarks
 

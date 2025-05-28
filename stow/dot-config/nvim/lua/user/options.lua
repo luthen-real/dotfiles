@@ -6,15 +6,13 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.mouse = "a" -- allow the mouse to be used in Nvim
 
 
-vim.opt.ruler = false           -- don't display the current position in file
-
-
+vim.opt.ruler = false -- don't display the current position in file
 
 -- vim.opt.guicursor = ""        -- leave cursor small in insert mode
 
 -- editing
 -- vim.opt.tildeop = true          -- "~" behaves like an operator
-vim.opt.foldmethod = "manual"         -- folds defined manually
+vim.opt.foldmethod = "manual" -- folds defined manually
 
 vim.opt.tabstop = 4           -- number of visual spaces per TAB
 vim.opt.softtabstop = 4       -- number of spacesin tab when editing
@@ -51,3 +49,6 @@ vim.cmd("set undofile")
 
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
+
+
+

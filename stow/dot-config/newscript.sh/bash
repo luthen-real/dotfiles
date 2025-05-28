@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+
+error() {
+    echo "error: $1"
+    exit 1
+}
+
+check_installed(){
+    commands=(
+        gum
+    )
+    for com in "$commands[@]"; do 
+        if ! command $com --version &>/dev/null; then
+            error "$com not installed"
+            exit 1
+        fi
+    done
+}

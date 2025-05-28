@@ -17,11 +17,9 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = ","
 vim.opt.termguicolors = true -- enable 24-bit RGB color in the TUI
-
 
 
 -- Setup lazy.nvim
@@ -39,15 +37,7 @@ require("lazy").setup({
             "nvim-treesitter/nvim-treesitter",
             build = ":TSUpdate",
         },
-        {
-            "ThePrimeagen/harpoon",
-            dependencies = { "nvim-lua/plenary.nvim" },
-
-        },
-
-        "mbbill/undotree",
         "tpope/vim-fugitive",
-
         { 'neovim/nvim-lspconfig' },
         { 'hrsh7th/cmp-nvim-lsp' },
         {
@@ -61,45 +51,18 @@ require("lazy").setup({
         {
             "L3MON4D3/LuaSnip",
             -- follow latest release.
-            version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+            version = "v2.*", 
             -- install jsregexp (optional!).
             dependencies = { "rafamadriz/friendly-snippets" },
             build = "make install_jsregexp"
         },
-        {
-            "williamboman/mason.nvim",
-        },
+        "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
-        {
-            "norcalli/nvim-colorizer.lua",
-            opts = {},
-        },
-        "MeanderingProgrammer/render-markdown.nvim",
-
-
-        { "VonHeikemen/lsp-zero.nvim" },
-        {
-            "lukas-reineke/lsp-format.nvim",
-        },
-        {
-            "tpope/vim-surround",
-        },
-
-        {
-            "folke/todo-comments.nvim",
-            dependencies = { "nvim-lua/plenary.nvim" },
-            opts = {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            },
-        },
-
-        -- Configure any other settings here. See the documentation for more details.
-        -- colorscheme that will be used when installing plugins.
-        install = { colorscheme = { "rose-pine" } },
+        "VonHeikemen/lsp-zero.nvim",
+        "lukas-reineke/lsp-format.nvim",
+        "tpope/vim-surround",
         -- automatically check for plugin updates
-        checker = { enabled = false },
+        checker = { enabled = true },
 
     },
 

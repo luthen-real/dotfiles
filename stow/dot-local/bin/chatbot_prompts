@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PFILE=~/.local/share/chatbot_prompts
+PFILE=~/.config/chatbot_prompt.sh/chatbot_prompts
 tag=$(cat $PFILE | cut -d '#' -f 1 | dmenu -l 50)
 
 # use -f2- to prevent from cutting the prompt

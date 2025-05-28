@@ -5,12 +5,11 @@ vim.keymap.set("n", "-", vim.cmd.Ex)
 
 local map = vim.keymap.set
 
-map("n", "<C-w>", ":bd<CR>", { noremap = true, silent = true })
-map("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
-map("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
-
-map("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
-map("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+-- map("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+-- map("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+--
+-- map("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+-- map("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 -- previous buffer with ctr shift h
 
 map("n", "<C-S-h>", ":bp<CR>", { noremap = true, silent = true })
@@ -40,6 +39,8 @@ map("v", "<leader>y", "\"+y")
 map("n", "<leader>Y", "\"+Y")
 
 
+-- Open
+map("n", "<leader>l", "<cmd>Lexplore<CR>")
 
 map("n", "<leader>d", "\"_d")
 map("v", "<leader>d", "\"_d")

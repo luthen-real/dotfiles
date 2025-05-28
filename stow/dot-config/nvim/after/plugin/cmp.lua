@@ -84,27 +84,4 @@ cmp.setup({
 
 
 })
-
--- cmp.setup.cmdline(":", {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = cmp.config.sources({
---         { name = "path" },
---     }, {
---         {
---             name = "cmdline",
---             option = {
---                 ignore_cmds = { "Man", "!" },
---             },
---         },
---     }),
--- })
---
--- cmp.setup.cmdline({ "/", "?" }, {
---     -- view = {
---     -- 	entries = { name = "wildmenu", separator = "|" },
---     -- },
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = {
---         { name = "buffer" },
---     },
--- })
+-- NOTE: for command line completion, view docs

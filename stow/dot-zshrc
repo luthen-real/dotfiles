@@ -1,4 +1,3 @@
-
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
@@ -49,9 +48,11 @@ zle -N down-line-or-beginning-search
 bindkey "^p" up-line-or-beginning-search
 bindkey "^n" down-line-or-beginning-search
 
-alias lt='latexmk -pdf -outdir=output -pvc --shell-escape'
+alias lt='latexmk -norc -halt-on-error -outdir=output'
+alias ltc='latexmk -pdf -outdir=output -pvc --shell-escape'
 alias la='ls -lah'
 alias afk='systemctl suspend'
+alias afkl='systemctl suspend && i3lock'
 alias ll='eza -lagoMF --icons -s modified --hyperlink --group-directories-first  --git --git-repos --time-style long-iso'
 alias llt='eza -alM --icons --tree -s modified --hyperlink --group-directories-first  --git --git-repos'
 alias ..='cd ..'
@@ -72,21 +73,24 @@ alias pd='pushd -q'
 alias gd='popd -q'
 alias pac='sudo pacman -S'
 alias con="nv -c /stopped"
-alias vid="vlc &> /dev/null"
-alias bckupdir="mkdir -p $(date +\"%d-%m\")-backup"
-alias today="date +%d-%m"
 alias texsym="zat $HOME/resources/references/symbols-a4.pdf &"
 alias python=/usr/bin/python3
 alias py=/usr/bin/python3
-alias ta="tmux attach -t"
-alias tl="tmuxp load"
-alias tls="tmux ls"
-alias tks="tmux kill-server"
-alias tnwn="tmux new-window -n"
-alias tnw="tmux new-window"
-alias tns="tmux new -s"
-alias td="tmux detach"
-alias tksess='tmux kill-session'
+
+
+# tmux(p)
+alias ta="tmux attach -t" \
+      tls="tmux ls" \
+      tks="tmux kill-server" \
+      tnwn="tmux new-window -n" \
+      tnw="tmux new-window" \
+      tns="tmux new -s" \
+      td="tmux detach" \
+      tksess='tmux kill-session' \
+      tl="tmuxp load" \
+      tlfs='tmuxp load $(fd session.yml | fzf --height=~100%)'
+
+
 alias o="xdg-open"
 alias time=/usr/bin/time
 alias eth_vpn='sudo openconnect -u jniederer@student-net.ethz.ch --useragent=AnyConnect -g student-net sslvpn.ethz.ch'
@@ -118,7 +122,6 @@ alias \
 	ccat="highlight --out-format=ansi" \
 	ip="ip -color=auto"
 
-# These common commands are just too long! Abbreviate them.
 alias \
 	ka="killall" \
 	g="git" \
@@ -130,19 +133,14 @@ alias \
 	xi="sudo xbps-install" \
 	xr="sudo xbps-remove -R" \
 	xq="xbps-query" \
-	z="zathura"
+	z="zathura" \
+    ff="firefox" \
 
 
-alias \
-    wifi_off='nmcli radio wifi off'
-    wifi_on='nmcli radio wifi on'
-
-
-function connect_euler.ethz(){
-    sudo openconnect -u jniederer@student-net.ethz.ch --useragent=AnyConnect -g student-net sslvpn.ethz.ch
-    ssh -i $HOME/.ssh/id_ed25519_euler jniederer@euler.ethz.ch
-}
-
+alias -g G='| grep' # easier way to pipe into grep
+alias -g ...='../..'
+    
+    
 
 
 # vim: set ft=zsh:

@@ -1,17 +1,12 @@
 #!/bin/sh
 
-# This script installs all packages for my artix setup
+# Installs all packages listed in ~/.config/synch_packages.sh
+#  using the corresponding package manager or git
 
-
-
-
-packages="~/.config/synch_packages.sh/packages.csv"
-package_url="https://raw.githubusercontent.com/zeno-nada/setup/refs/heads/main/install/packages.csv"
 
 error() {
     printf "Error: $1\n" >&2; exit 1
 }
-
 
 
 gitmakeinstall() {
@@ -32,12 +27,13 @@ gitmakeinstall() {
 	cd /tmp || return 1
 }
 
-
-install_yay() {
+# Install yay if not already installed
+bootstrap_yay() {
     if command yay --version &>/dev/null; then
         echo "yay already installed. Skipping..."
         return 0
     fi
+    mkdir -p ~/repos/yay
     git clone https://aur.archlinux.org/yay.git ~/repos/yay
     cd ~/repos/yay
     makepkg -si
@@ -46,39 +42,12 @@ install_yay() {
 
 
 
-if id -u &>/dev/null ;then
-    error "You must run this script as root"
-fi
-
-# Enable parallel downloads for pacman
-sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
-
-
 # The arch keyring is the package which contains the GPG keys of trusted package maintainers
-echo "Refreshing keyring"
+echo "Refreshing keyring and installing required packages"
 pacman --noconfirm --needed -S curl ca-certificates base-devel git zsh || error "Failed to install required packages"
 
 
-
-# Use all cores for compilation
-sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
-
-[[ -f "$packages" ]] || curl -L -o "$packages" "$package_url"
-
-# Main installation loop
-while IFS=, read -r tag package ; do
-    case "$tag" in
-    "g")
-        url=$package
-        dir="${url##*/}"
-        git  clone --depth 1 --single-branch --no-tags "$url" /tmp/$dir
-        cd /tmp/$dir || return
-        make
-        make install
-        ;;
-    "y")
-        yay -S
-        ;;
-    *) sudo pacman --noconfirm --needed -S "$package" ;;
-    esac
-done < $packages
+# Check if this script is run as root
+if id -u &>/dev/null ;then
+    error "You must run this script as root"
+fi

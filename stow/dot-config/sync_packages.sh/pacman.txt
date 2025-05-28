@@ -1,0 +1,14 @@
+xorg-server
+unclutter
+xorg-xbacklight
+xorg-xwininfo
+xorg-xinit
+xorg-xset
+firefox
+newsboat
+git
+neovim
+zsh
+tmux
+pass
+sudo
