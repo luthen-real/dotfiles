@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Installs all packages listed in ~/.config/synch_packages.sh
-#  using the corresponding package manager or git
+# Uses yay to install all packages listed in ~/.config/.../packages.txt
+# TODO: implement management packages installed natively using git/makepkg 
 
 
 error() {
@@ -9,13 +9,14 @@ error() {
 }
 
 
+# TODO: generalize
 gitmakeinstall() {
-	username="${1##*/}"
-	repo="${progname%.git}"
-	dir="$user/$repo"
-    echo  $dir
+    reponame="${1##*/}"
+    reponame="${reponame%.git}"
+    echo $reponame
     return 0
-	sudo -u "$name" git -C "$repodir" clone --depth 1 --single-branch \
+
+	git clone --depth 1 --single-branch \
 		--no-tags -q "$1" "$dir" ||
 		{
 			cd "$dir" || return 1
@@ -27,27 +28,23 @@ gitmakeinstall() {
 	cd /tmp || return 1
 }
 
-# Install yay if not already installed
-bootstrap_yay() {
-    if command yay --version &>/dev/null; then
-        echo "yay already installed. Skipping..."
-        return 0
-    fi
-    mkdir -p ~/repos/yay
-    git clone https://aur.archlinux.org/yay.git ~/repos/yay
-    cd ~/repos/yay
-    makepkg -si
-    cd -
-}
-
 
 
 # The arch keyring is the package which contains the GPG keys of trusted package maintainers
 echo "Refreshing keyring and installing required packages"
-pacman --noconfirm --needed -S curl ca-certificates base-devel git zsh || error "Failed to install required packages"
+sudo pacman --noconfirm --needed -S curl ca-certificates base-devel git zsh || error "Failed to install required packages"
 
 
-# Check if this script is run as root
-if id -u &>/dev/null ;then
-    error "You must run this script as root"
+# YAY BOOTSTRAP CHECK 
+# Check if yay is already installed, if not, clone the repo and install it
+if ! command yay --version &>/dev/null; then
+    git clone https://aur.archlinux.org/yay.git ~/repos/yay || error "failed to clone yay"
+    cd ~/repos/yay
+    makepkg -si
+    cd -
 fi
+
+# Main loop
+for package in $(cat ~/.config/$(basename $0)/packages.txt); do
+    yay -S --noconfirm --needed $package
+done
