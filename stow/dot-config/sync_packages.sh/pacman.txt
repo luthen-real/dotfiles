@@ -4,3 +4,4 @@ gum
 xorg
 pass
 firefox
+ttf-hack-nerd

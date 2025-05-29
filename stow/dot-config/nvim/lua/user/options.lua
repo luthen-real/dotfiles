@@ -49,6 +49,4 @@ vim.cmd("set undofile")
 
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
-
-
-
+vim.cmd("colorscheme onedark_dark")

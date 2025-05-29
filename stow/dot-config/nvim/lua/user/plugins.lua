@@ -51,7 +51,7 @@ require("lazy").setup({
         {
             "L3MON4D3/LuaSnip",
             -- follow latest release.
-            version = "v2.*", 
+            version = "v2.*",
             -- install jsregexp (optional!).
             dependencies = { "rafamadriz/friendly-snippets" },
             build = "make install_jsregexp"
@@ -61,9 +61,14 @@ require("lazy").setup({
         "VonHeikemen/lsp-zero.nvim",
         "lukas-reineke/lsp-format.nvim",
         "tpope/vim-surround",
-        -- automatically check for plugin updates
-        checker = { enabled = true },
+        "olimorris/onedarkpro.nvim",
 
     },
+
+    -- automatically check for plugin updates
+    checker = { enabled = true },
+    install = {
+        missing = true,
+    }
 
 })
