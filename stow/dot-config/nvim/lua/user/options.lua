@@ -49,4 +49,9 @@ vim.cmd("set undofile")
 
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
-vim.cmd("colorscheme onedark_dark")
+
+vim.cmd("colorscheme habamax")
+
+vim.g.markdown_fenced_languages = { 'zsh=bash' }
+vim.api.nvim_set_hl(0, "@punctuation", { link = "Normal" })
+

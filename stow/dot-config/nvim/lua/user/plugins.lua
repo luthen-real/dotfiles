@@ -61,9 +61,9 @@ require("lazy").setup({
         "VonHeikemen/lsp-zero.nvim",
         "lukas-reineke/lsp-format.nvim",
         "tpope/vim-surround",
-        "olimorris/onedarkpro.nvim",
 
     },
+
 
     -- automatically check for plugin updates
     checker = { enabled = true },

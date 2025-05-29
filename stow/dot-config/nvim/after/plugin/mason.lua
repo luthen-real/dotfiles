@@ -92,18 +92,18 @@ lspconfig.lua_ls.setup({
     },
 })
 
-lspconfig.pylsp.setup({
-    settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    ignore = { "W391" },
-                    maxLineLength = 100,
-                },
-            },
-        },
-    },
-})
+-- lspconfig.pylsp.setup({
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 pycodestyle = {
+--                     ignore = { "W391" },
+--                     maxLineLength = 100,
+--                 },
+--             },
+--         },
+--     },
+-- })
 
 -- lspconfig.ocamllsp.setup({
 -- 	cmd = { "ocamllsp" },
@@ -119,7 +119,7 @@ lspconfig.pylsp.setup({
 -- 	),
 -- })
 --
-lspconfig.jdtls.setup({})
+-- lspconfig.jdtls.setup({})
 lspconfig.bashls.setup({})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

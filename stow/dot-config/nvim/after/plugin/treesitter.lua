@@ -5,7 +5,7 @@ ts.setup({
 	ensure_installed = { "bash", "rust", "c", "vim", "vimdoc", "query", "lua", "java", "python" },
 	highlight = {
 		enable = true,
-		-- disable = { "tex", "md" },
+		-- disable = {  "md", "markdown" },
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
