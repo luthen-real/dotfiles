@@ -1,7 +1,6 @@
 # Packages
 
 
-
 # Dotfiles
 
 to install/link the dotfiles, make sure `stow` is installed and then run
@@ -23,4 +22,3 @@ stow -D --dotfiles --verbose --target=$HOME stow
 # or
 make clean
 ```
-
