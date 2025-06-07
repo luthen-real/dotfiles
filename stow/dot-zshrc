@@ -5,7 +5,6 @@ plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/supercharge"
 plug "zap-zsh/vim"
 plug "chivalryq/git-alias"
-plug "zsh-users/zsh-syntax-highlighting"
 plug "Aloxaf/fzf-tab"
 plug "Freed-Wu/fzf-tab-source"
 plug "mfaerevaag/wd"
@@ -22,8 +21,7 @@ compinit
 
 source <(fzf --zsh)
 
-PS1="%n@%m:%2~ %(1j.<%j> .)%# "
-RPROMPT="%y %D{%d.%m %H:%M}"
+PS1="%m:%2~ $ "
 
 # zsh history
 HISTFILE=~/.zsh_history
@@ -76,6 +74,7 @@ alias con="nv -c /stopped"
 alias texsym="zat $HOME/resources/references/symbols-a4.pdf &"
 alias python=/usr/bin/python3
 alias py=/usr/bin/python3
+alias copypath='pwd | xclip -sel clipboard'
 
 
 # tmux(p)
@@ -133,15 +132,21 @@ alias \
 	xi="sudo xbps-install" \
 	xr="sudo xbps-remove -R" \
 	xq="xbps-query" \
-	z="zathura" \
     ff="firefox" \
 
 
 alias -g G='| grep'   
 alias -g L='| less' 
 alias -g ...='../..'
-    
-    
 
+
+zd() {
+  cd "$(zoxide query -i)"
+}
+
+
+
+
+eval "$(zoxide init zsh)"
 
 # vim: set ft=zsh:

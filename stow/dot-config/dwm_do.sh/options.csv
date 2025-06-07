@@ -1,3 +1,4 @@
 do nothing (sucessfully),true
 lock screen,systemctl suspend && i3lock
 get WM_CLASS,~/.local/bin/get_wmclass.sh
+bookmark copied url,~/.local/bin/bookmarks.sh save

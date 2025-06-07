@@ -5,3 +5,4 @@ xorg
 pass
 firefox
 ttf-hack-nerd
+zoxide

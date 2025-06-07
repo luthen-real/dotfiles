@@ -1,9 +1,0 @@
-session_name: "cheatsheet"
-start_directory: ~/projects/cheatsheet
-windows:
-  - window_name: editor
-    panes:
-      - shell_command: nvim .
-  - window_name: zsh
-    panes:
-      - shell_command: latexmk -pdf -outdir=output -pvc --shell-escape main.tex

@@ -3,6 +3,7 @@ bin:~/.local/bin
 c:~/.config
 con:~/repos/dotfiles/stow/dot-config
 dcon:~/dotfiles/stow/dot-config
+dmenu:~/repos/dmenu
 docs:~/documents
 dot:~/repos/dotfiles
 dotfiles:~/repos/dotfiles
@@ -14,8 +15,10 @@ pdfs:~/resources/pdfs
 r:~/resources/pdfs
 rai:~/resources/pdfs/computer_science/ai
 rcs:~/resources/pdfs/computer_science
+rinfsec:~/resources/pdfs/computer_science/information_security
 rlinalg:~/resources/pdfs/mathematics/linear_algebra
 rmath:~/resources/pdfs/mathematics
 rml:~/resources/pdfs/computer_science/ai/machine_learning
 s:~/documents/school
 siml:~/documents/school/introduction_to_machine_learning
+st:~/repos/st

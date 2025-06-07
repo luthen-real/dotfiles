@@ -12,7 +12,7 @@ error() {
 
 DFILE=~/.config/$(basename $0)/options.csv
 touch $DFILE
-SEL=$(cat $DFILE | cut -d , -f1 | dmenu -l 50)
+SEL=$(cat $DFILE | cut -d , -f1 | sort -ui  | dmenu -p "DO: ")
+[[ $SEL == "" ]] && exit 1 # exit if nothing was selected
 CMD=$(grep -E "^$SEL" $DFILE | cut -d , -f2)
-ARGS=$(grep -E "^$SEL" $DFILE | cut -d , -f3-)
 zsh -c "$CMD"

@@ -1,7 +1,0 @@
-session_name: "music"
-windows:
-  - window_name: mpv
-    start_directory: ~/music
-    focus: true
-    panes:
-      - shell_command: ls
