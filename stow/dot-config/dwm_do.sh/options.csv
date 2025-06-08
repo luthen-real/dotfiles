@@ -1,4 +1,3 @@
-do nothing (sucessfully),true
-lock screen,systemctl suspend && i3lock
-get WM_CLASS,~/.local/bin/get_wmclass.sh
-bookmark copied url,~/.local/bin/bookmarks.sh save
+say hello,notify-send "HELLO THERE" "this is a message"
+disable laptop display,xrandr --output eDP-1 --off
+capture screen,scrot -d 1 -s

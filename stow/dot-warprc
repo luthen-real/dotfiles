@@ -7,6 +7,7 @@ dmenu:~/repos/dmenu
 docs:~/documents
 dot:~/repos/dotfiles
 dotfiles:~/repos/dotfiles
+dwm:~/repos/dwm
 iml:~/documents/school/introduction_to_machine_learning
 iml_pro:~/repos/iml_project
 n:~/documents/zettelkasten

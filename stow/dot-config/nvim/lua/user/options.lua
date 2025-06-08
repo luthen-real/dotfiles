@@ -6,6 +6,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.mouse = "a" -- allow the mouse to be used in Nvim
 
 
+
 vim.opt.ruler = false -- don't display the current position in file
 
 -- vim.opt.guicursor = ""        -- leave cursor small in insert mode

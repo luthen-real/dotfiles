@@ -8,7 +8,7 @@ require("mason").setup(
                 package_uninstalled = "✗"
             }
         },
-        ensure_installed = { 'lua_ls', 'rust_analyzer', "clangd", "bash" },
+        ensure_installed = { 'lua_ls', "clangd", "bash" },
         handlers = {
             function(server_name)
                 require('lspconfig')[server_name].setup({})
@@ -16,6 +16,7 @@ require("mason").setup(
         }
     }
 )
+
 
 require("mason-lspconfig").setup()
 
@@ -57,10 +58,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local lspconfig = require('lspconfig')
 
-lspconfig.lua_ls.setup({})
-
 lspconfig.texlab.setup({})
-
 lspconfig.denols.setup({})
 
 -- lspconfig.diagnosticls.setup({})
@@ -105,44 +103,15 @@ lspconfig.lua_ls.setup({
 --     },
 -- })
 
--- lspconfig.ocamllsp.setup({
--- 	cmd = { "ocamllsp" },
--- 	filetypes = { "ocaml", "reason" },
--- 	root_dir = require("lspconfig").util.root_pattern(
--- 		"*.opam",
--- 		"esy.json",
--- 		"package.json",
--- 		".git",
--- 		"dune-project",
--- 		"dune-workspace",
--- 		"hw*"
--- 	),
--- })
---
+
+
 -- lspconfig.jdtls.setup({})
 lspconfig.bashls.setup({})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- lspconfig.cssls.setup({
---         capabilities = capabilities,
--- })
-
--- lspconfig.clangd.setup({})
-
 -- Ensure clangd is properly set up with nvim-lspconfig
 lspconfig.clangd.setup({})
-
-
--- python
 lspconfig.pyright.setup {}
-
-
-lspconfig.rust_analyzer.setup({
-    -- Server-specific settings. See `:help lspconfig-setup`
-    settings = {
-        ["rust-analyzer"] = {},
-    },
-})
 lspconfig.html.setup({})
